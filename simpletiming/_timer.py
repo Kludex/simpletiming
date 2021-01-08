@@ -21,13 +21,13 @@ def _timer_decorator(func: Callable, log: Callable):
 
 
 def _class_timer_decorator(cls, log: Callable):
-    def decorate():
+    def decorate(cls):
         for attr in cls.__dict__:
             if callable(getattr(cls, attr)):
                 setattr(cls, attr, _timer_decorator(getattr(cls, attr), log))
         return cls
 
-    return decorate
+    return decorate(cls)
 
 
 def _log(name: Optional[str], message: str, logger: Callable[[str], None]):
