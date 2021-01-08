@@ -44,8 +44,11 @@ def _log(name: Optional[str], message: str, logger: Callable[[str], None]):
 
 
 class Timer:
+    name: Optional[str]
+    message: str
+    logger: Callable[[str], None]
     _start_time: float
-    _log_message = Callable[[Optional[str], str, Callable[[str], None]], None]
+    _log_message: Callable[[Optional[str], str, Callable[[str], None]], None]
 
     def __init__(
         self,
@@ -53,6 +56,10 @@ class Timer:
         message: str = "Elapsed time: {:0.4f} seconds",
         logger: Callable[[str], None] = print,
     ):
+        self.name = name
+        self.message = message
+        self.logger = logger
+
         self._start_time = None
         self._log_message = _log(name, message, logger)
 
