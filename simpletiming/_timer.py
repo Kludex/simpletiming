@@ -74,6 +74,7 @@ class Timer:
         last = time.perf_counter() - self._start_time
         self._start_time = None
         self._log_message(last)
+        return last
 
     def __enter__(self):
         self.start()
